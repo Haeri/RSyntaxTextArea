@@ -104,6 +104,7 @@ public class Theme {
 	public int lineNumberFontSize;
 	public Color foldIndicatorFG;
 	public Color foldBG;
+	public Color armedFoldBG;
 
 
 	/**
@@ -167,6 +168,7 @@ public class Theme {
 			lineNumberFontSize = gutter.getLineNumberFont().getSize();
 			foldIndicatorFG = gutter.getFoldIndicatorForeground();
 			foldBG = gutter.getFoldBackground();
+			armedFoldBG = gutter.getArmedFoldBackground();
 		}
 
 	}
@@ -220,6 +222,8 @@ public class Theme {
 			gutter.setLineNumberFont(font);
 			gutter.setFoldIndicatorForeground(foldIndicatorFG);
 			gutter.setFoldBackground(foldBG);
+			System.out.println("Setting armed fold bg to: " + armedFoldBG + " (foldbg == " + foldBG + ")");
+			gutter.setArmedFoldBackground(armedFoldBG);
 		}
 
 	}
@@ -463,6 +467,7 @@ public class Theme {
 			elem = doc.createElement("foldIndicator");
 			elem.setAttribute("fg", colorToString(foldIndicatorFG));
 			elem.setAttribute("iconBg", colorToString(foldBG));
+			elem.setAttribute("iconArmedBg", colorToString(armedFoldBG));
 			root.appendChild(elem);
 
 			elem = doc.createElement("iconRowHeader");
@@ -700,6 +705,8 @@ public class Theme {
 				theme.foldIndicatorFG = stringToColor(color);
 				color = attrs.getValue("iconBg");
 				theme.foldBG = stringToColor(color);
+				color = attrs.getValue("iconArmedBg");
+				theme.armedFoldBG = stringToColor(color);
 			}
 
 			else if ("gutterBackground".equals(qName)) {
